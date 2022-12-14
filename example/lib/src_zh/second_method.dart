@@ -1,6 +1,6 @@
 import 'package:example/src_zh/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil_enhanced/flutter_screenutil.dart';
 
 /// 请注意，您仍然可以使用 [Theme] 为您的小部件设置主题，但如果您想为 MaterialApp
 /// 设置主题，您必须在 builder 方法中使用 ScreenUtil.init 并使用 Theme 包装子项

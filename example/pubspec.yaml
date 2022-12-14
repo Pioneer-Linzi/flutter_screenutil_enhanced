@@ -17,7 +17,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_screenutil:
+  flutter_screenutil_enhanced:
     path: ../
   
   device_preview: ^1.1.0

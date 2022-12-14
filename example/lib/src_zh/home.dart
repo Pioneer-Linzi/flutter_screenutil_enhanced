@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil_enhanced/flutter_screenutil.dart';
 
 class HomePageScaffold extends StatelessWidget {
   const HomePageScaffold({Key? key, required this.title}) : super(key: key);

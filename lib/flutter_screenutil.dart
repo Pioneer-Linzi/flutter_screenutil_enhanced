@@ -3,7 +3,7 @@
  * email: zhuoyuan93@gmail.com
  */
 
-library flutter_screenutil;
+library flutter_screenutil_enhanced;
 
 export 'src/r_padding.dart';
 export 'src/r_sizedbox.dart';

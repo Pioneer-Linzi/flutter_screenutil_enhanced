@@ -8,7 +8,7 @@ import 'dart:ui' show FlutterWindow;
 import 'dart:async' show Completer;
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/src/form_factor.dart';
+import 'form_factor.dart';
 
 class ScreenUtil {
   static const Size defaultSize = Size(360, 690);

@@ -1,6 +1,6 @@
 import 'package:example/src/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_screenutil_enhanced/flutter_screenutil.dart';
 
 /// Note that you still can use [Theme] to theme your widget, but if you want
 /// to theme MaterialApp you must use ScreenUtil.init in builder method and
