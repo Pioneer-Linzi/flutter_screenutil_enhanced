@@ -8,14 +8,19 @@ import 'dart:ui' show FlutterWindow;
 import 'dart:async' show Completer;
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/src/form_factor.dart';
 
 class ScreenUtil {
   static const Size defaultSize = Size(360, 690);
   static ScreenUtil _instance = ScreenUtil._();
+  static const double defautlScaleRatio = 1.5;
 
   /// UI设计中手机尺寸 , dp
   /// Size of the phone in UI Design , dp
   late Size _uiSize;
+
+  /// ipad 默认放大倍率
+  late double _scaleRatio;
 
   ///屏幕方向
   late Orientation _orientation;
@@ -89,13 +94,12 @@ class ScreenUtil {
   }
 
   /// Initializing the library.
-  static Future<void> init(
-    BuildContext context, {
-    Size designSize = defaultSize,
-    bool splitScreenMode = false,
-    bool minTextAdapt = false,
-    bool scaleByHeight = false
-  }) async {
+  static Future<void> init(BuildContext context,
+      {Size designSize = defaultSize,
+      bool splitScreenMode = false,
+      double scaleRatio = defautlScaleRatio,
+      bool minTextAdapt = false,
+      bool scaleByHeight = false}) async {
     final navigatorContext = Navigator.maybeOf(context)?.context as Element?;
     final mediaQueryContext =
         navigatorContext?.getElementForInheritedWidgetOfExactType<MediaQuery>();
@@ -118,11 +122,13 @@ class ScreenUtil {
     _instance
       .._context = scaleByHeight ? null : context
       .._uiSize = designSize
+      .._scaleRatio = scaleRatio
       .._splitScreenMode = splitScreenMode
       .._minTextAdapt = minTextAdapt
       .._orientation = orientation
-      .._screenWidth = scaleByHeight ? (deviceSize.height * designSize.width) /
-          designSize.height : deviceSize.width
+      .._screenWidth = scaleByHeight
+          ? (deviceSize.height * designSize.width) / designSize.height
+          : deviceSize.width
       .._screenHeight = deviceSize.height;
 
     _instance._elementsToRebuild?.forEach((el) => el.markNeedsBuild());
@@ -165,8 +171,21 @@ class ScreenUtil {
       _context == null ? 0 : MediaQuery.of(_context!).padding.bottom;
 
   /// 实际尺寸与UI设计的比例
+  /// Tablet 中缩放 _scaleRatio 倍，普通屏幕不缩放
   /// The ratio of actual width to UI design
-  double get scaleWidth => screenWidth / _uiSize.width;
+  double get scaleTabletWidth =>
+      getFormFactor(_context!) == ScreenType.Handset ||
+              getFormFactor(_context!) == ScreenType.Watch
+          ? 1
+          : _scaleRatio;
+
+  /// 实际尺寸与UI设计的比例
+  /// tablet 桌面端 中缩放 _scaleRatio 倍，普通屏幕缩放
+  /// The ratio of actual width to UI design
+  double get scaleWidth => getFormFactor(_context!) == ScreenType.Handset ||
+          getFormFactor(_context!) == ScreenType.Watch
+      ? screenWidth / _uiSize.width
+      : _scaleRatio;
 
   ///  /// The ratio of actual height to UI design
   double get scaleHeight =>
