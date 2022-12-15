@@ -8,6 +8,12 @@ extension SizeExtension on num {
   ///[ScreenUtil.setWidth]
   double get w => ScreenUtil().setWidth(this);
 
+  ///[ScreenUtil.setTabletWidth]
+  double get tw => ScreenUtil().setTabletWidth(this);
+
+  ///[ScreenUtil.setAdaptiveWidth]
+  double get aw => ScreenUtil().setAdaptiveWidth(this);
+
   ///[ScreenUtil.setHeight]
   double get h => ScreenUtil().setHeight(this);
 
@@ -58,6 +64,20 @@ extension EdgeInsetsExtension on EdgeInsets {
         left: left.r,
       );
 
+  EdgeInsets get aw => copyWith(
+        top: top.aw,
+        bottom: bottom.aw,
+        right: right.aw,
+        left: left.aw,
+      );
+
+  EdgeInsets get tw => copyWith(
+        top: top.tw,
+        bottom: bottom.tw,
+        right: right.tw,
+        left: left.tw,
+      );
+
   EdgeInsets get w => copyWith(
         top: top.w,
         bottom: bottom.w,
@@ -88,6 +108,18 @@ extension BorderRaduisExtension on BorderRadius {
         topLeft: topLeft.w,
         topRight: topRight.w,
       );
+  BorderRadius get tw => copyWith(
+        bottomLeft: bottomLeft.tw,
+        bottomRight: bottomRight.tw,
+        topLeft: topLeft.tw,
+        topRight: topRight.tw,
+      );
+  BorderRadius get aw => copyWith(
+        bottomLeft: bottomLeft.aw,
+        bottomRight: bottomRight.aw,
+        topLeft: topLeft.aw,
+        topRight: topRight.aw,
+      );
 
   BorderRadius get h => copyWith(
         bottomLeft: bottomLeft.h,
@@ -104,6 +136,10 @@ extension RaduisExtension on Radius {
   Radius get w => Radius.elliptical(x.w, y.w);
 
   Radius get h => Radius.elliptical(x.h, y.h);
+
+  Radius get tw => Radius.elliptical(x.tw, y.tw);
+
+  Radius get aw => Radius.elliptical(x.aw, y.aw);
 }
 
 extension BoxConstraintsExtension on BoxConstraints {
@@ -128,6 +164,20 @@ extension BoxConstraintsExtension on BoxConstraints {
         maxWidth: maxWidth.w,
         minHeight: minHeight.w,
         minWidth: minWidth.w,
+      );
+
+  BoxConstraints get tw => this.copyWith(
+        maxHeight: maxHeight.tw,
+        maxWidth: maxWidth.tw,
+        minHeight: minHeight.tw,
+        minWidth: minWidth.tw,
+      );
+
+  BoxConstraints get aw => this.copyWith(
+        maxHeight: maxHeight.aw,
+        maxWidth: maxWidth.aw,
+        minHeight: minHeight.aw,
+        minWidth: minWidth.aw,
       );
 
   BoxConstraints get h => this.copyWith(

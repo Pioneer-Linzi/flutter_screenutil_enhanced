@@ -170,22 +170,23 @@ class ScreenUtil {
   double get bottomBarHeight =>
       _context == null ? 0 : MediaQuery.of(_context!).padding.bottom;
 
-  /// 实际尺寸与UI设计的比例
-  /// Tablet 中缩放 _scaleRatio 倍，普通屏幕不缩放
+  /// 实际尺寸与UI设计的比例，只有handset 类型不进行缩放，其他类型进行缩放
   /// The ratio of actual width to UI design
   double get scaleTabletWidth =>
-      getFormFactor(_context!) == ScreenType.Handset ||
-              getFormFactor(_context!) == ScreenType.Watch
-          ? 1
-          : _scaleRatio;
+      getFormFactor(_context!) == ScreenType.Handset ? 1 : _scaleRatio;
+
+  /// 实际尺寸与UI设计的比例
+  /// 所有类型均进行缩放
+  double get scaleWidth => screenWidth / _uiSize.width;
 
   /// 实际尺寸与UI设计的比例
   /// tablet 桌面端 中缩放 _scaleRatio 倍，普通屏幕缩放
   /// The ratio of actual width to UI design
-  double get scaleWidth => getFormFactor(_context!) == ScreenType.Handset ||
-          getFormFactor(_context!) == ScreenType.Watch
-      ? screenWidth / _uiSize.width
-      : _scaleRatio;
+  double get scaleAdaptiveWidth =>
+      getFormFactor(_context!) == ScreenType.Handset ||
+              getFormFactor(_context!) == ScreenType.Watch
+          ? screenWidth / _uiSize.width
+          : _scaleRatio;
 
   ///  /// The ratio of actual height to UI design
   double get scaleHeight =>
@@ -201,6 +202,12 @@ class ScreenUtil {
   /// Height can also be adapted according to this to ensure no deformation ,
   /// if you want a square
   double setWidth(num width) => width * scaleWidth;
+
+  /// 只有handset 类型不进行缩放，其他类型进行缩放
+  double setTabletWidth(num width) => width * scaleTabletWidth;
+
+  /// tablet 桌面端 中缩放 _scaleRatio 倍，普通屏幕缩放
+  double setAdaptiveWidth(num width) => width * scaleAdaptiveWidth;
 
   /// 根据UI设计的设备高度适配
   /// 当发现UI设计中的一屏显示的与当前样式效果不符合时,
